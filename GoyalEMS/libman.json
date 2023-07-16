@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootstrap@5.3.0",
+      "destination": "Content/CSS/",
+      "files": [
+        "js/bootstrap.min.js",
+        "css/bootstrap.css"
+      ]
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "Content/toastr/",
+      "files": [
+        "toastr.min.js",
+        "toastr.css"
+      ]
+    }
+  ]
+}
