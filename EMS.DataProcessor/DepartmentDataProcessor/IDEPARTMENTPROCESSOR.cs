@@ -8,7 +8,9 @@ namespace EMS.DataProcessor.DepartmentDataProcessor
 {
    public interface IDEPARTMENTPROCESSOR
     {
-        string Save(Department department, out int StatusCode);
-        List<Department> GetDepartments { get; }
+        string Save(DepartmentModel department, out int StatusCode);
+        List<DepartmentModel> GetDepartments { get; }
+
+        DepartmentModel GetDepartment(int DepartmentId);
     }
 }

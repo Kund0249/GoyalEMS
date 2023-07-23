@@ -4,39 +4,62 @@ using EMS.DataModel.DepartmentDataModel;
 
 namespace EMS.DataProcessor.DepartmentDataProcessor
 {
-   public class DEPARTMENTPROCESSOR : IDEPARTMENTPROCESSOR
+    public class DEPARTMENTPROCESSOR : IDEPARTMENTPROCESSOR
     {
-      private readonly IDEPARTMENTREPOSITORY _DB;
+        private readonly IDEPARTMENTREPOSITORY _DB;
         public DEPARTMENTPROCESSOR()
         {
             _DB = new DEPARTMENTREPOSITORY();
         }
 
-        public List<Department> GetDepartments
+        public List<DepartmentModel> GetDepartments
         {
             get
             {
-                List<Department> departments = new List<Department>();
-                foreach (var item in _DB.GetDepartments)
+                List<DepartmentModel> departments = new List<DepartmentModel>();
+
+                List<Department> departmentlist = _DB.GetDepartments;
+
+                foreach (var dept in departmentlist)
                 {
-                    departments.Add(new Department()
+                    departments.Add(new DepartmentModel()
                     {
-                        DeptId = item.DeptId,
-                        DepartmentName = item.DepartmentName
+                        DeptId = dept.DeptId,
+                        DepartmentName = dept.DepartmentName
                     });
                 }
+
                 return departments;
             }
         }
 
-        public string Save(Department department, out int StatusCode)
+        public DepartmentModel GetDepartment(int DepartmentId)
         {
-            DataModel.DepartmentDataModel.Department department1 = new DataModel.DepartmentDataModel.Department()
+            Department department = _DB.GetDepartment(DepartmentId);
+
+            if (department != null)
             {
-                DeptId = department.DeptId,
-                DepartmentName = department.DepartmentName
+                return new DepartmentModel()
+                {
+                    DeptId = department.DeptId,
+                    DepartmentName = department.DepartmentName
+                };
+            }
+            return null;
+        }
+
+        public string Save(DepartmentModel Model, out int StatusCode)
+        {
+            Department department = new Department()
+            {
+                DeptId = Model.DeptId,
+                DepartmentName = Model.DepartmentName
             };
-            return _DB.Save(department1,out StatusCode);
+
+            if (department.DeptId == 0)
+                return _DB.Save(department, out StatusCode);
+            else
+                return _DB.Update(department, out StatusCode);
         }
     }
 }

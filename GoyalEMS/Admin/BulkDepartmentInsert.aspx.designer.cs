@@ -11,7 +11,7 @@ namespace GoyalEMS.Admin
 {
 
 
-    public partial class Department
+    public partial class BulkDepartmentInsert
     {
 
         /// <summary>
@@ -24,15 +24,6 @@ namespace GoyalEMS.Admin
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// HdfDepartmentId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HdfDepartmentId;
-
-        /// <summary>
         /// txtDepartmentName control.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,15 @@ namespace GoyalEMS.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDepartmentName;
+
+        /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
 
         /// <summary>
         /// btnSubmit control.

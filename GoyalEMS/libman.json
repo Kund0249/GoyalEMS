@@ -12,10 +12,17 @@
     },
     {
       "library": "toastr.js@2.1.4",
-      "destination": "Content/toastr/",
+      "destination": "ClientLib/",
       "files": [
-        "toastr.min.js",
-        "toastr.css"
+        "toastr.css",
+        "toastr.min.js"
+      ]
+    },
+    {
+      "library": "jquery@3.7.0",
+      "destination": "ClientLib/",
+      "files": [
+        "jquery.js"
       ]
     }
   ]

@@ -18,29 +18,58 @@ namespace EMS.DataModel.DepartmentDataModel
             get
             {
                 List<Department> departments = new List<Department>();
-                using (SqlConnection con = new SqlConnection(ConnectionString))
+
+                SqlConnection con = new SqlConnection(ConnectionString);
+                SqlCommand cmd = new SqlCommand("select * from tblDepartment", con);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                adapter.Fill(dt);
+
+                if (dt != null)
                 {
-                    SqlCommand cmd = new SqlCommand("Select * from tblDepartment", con);
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    DataTable table = new DataTable();
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                    dataAdapter.Fill(table);
-                    string Message = string.Empty;
-                    if (table.Rows.Count > 0)
+                    if (dt.Rows.Count > 0)
                     {
-                        foreach (DataRow row in table.Rows)
+                        foreach (DataRow dr in dt.Rows)
                         {
-                            departments.Add(
-                                new Department()
-                                {
-                                    DeptId = Convert.ToInt32(row["DeptId"]),
-                                    DepartmentName = row["DepartmentName"].ToString()
-                                });
+                            departments.Add(new Department()
+                            { DeptId = Convert.ToInt32(dr["DeptId"]), DepartmentName = dr["DepartmentName"].ToString() });
                         }
+                        //departments.Add(new Department() { DeptId = 1,DepartmentName="A"})
                     }
                 }
+
                 return departments;
             }
+        }
+
+        public Department GetDepartment(int DepartmentId)
+        {
+           Department departments = null;
+
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand("select * from tblDepartment where DeptId = " + DepartmentId, con);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            adapter.Fill(dt);
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    departments = new Department()
+                    {
+                        DeptId = Convert.ToInt32(dt.Rows[0]["DeptId"]),
+                        DepartmentName = dt.Rows[0]["DepartmentName"].ToString()
+                    };
+                    return departments;
+                }
+            }
+
+            return departments;
         }
 
         public string Save(Department department, out int StatusCode)
@@ -64,6 +93,36 @@ namespace EMS.DataModel.DepartmentDataModel
                 {
                     StatusCode = Convert.ToInt32(table.Rows[0]["StatusCode"]);
                     Message = table.Rows[0]["Message"].ToString();
+                }
+                return Message;
+            }
+        }
+
+        public string Update(Department department, out int StatusCode)
+        {
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spUpdatetDepartment", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@DepartmentName", department.DepartmentName);
+                cmd.Parameters.AddWithValue("@DepartmentId", department.DeptId);
+
+                DataTable table = new DataTable();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(table);
+
+               
+                string Message = string.Empty;
+                if (table.Rows.Count > 0)
+                {
+                    StatusCode = Convert.ToInt32(table.Rows[0]["StatusCode"]);
+                    Message = table.Rows[0]["Message"].ToString();
+                }
+                else
+                {
+                    StatusCode = 500;
+                    Message = "There is some proble while processing this Request!";
                 }
                 return Message;
             }

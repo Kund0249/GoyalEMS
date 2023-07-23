@@ -9,6 +9,10 @@ namespace EMS.DataModel.DepartmentDataModel
    public interface IDEPARTMENTREPOSITORY
     {
         string Save(Department department,out int StatusCode);
+
+        string Update(Department department, out int StatusCode);
         List<Department> GetDepartments { get; }
+
+        Department GetDepartment(int DepartmentId);
     }
 }

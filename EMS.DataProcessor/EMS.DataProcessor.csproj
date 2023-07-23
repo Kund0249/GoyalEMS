@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="DepartmentDataProcessor\Department.cs" />
+    <Compile Include="DepartmentDataProcessor\DepartmentModel.cs" />
     <Compile Include="DepartmentDataProcessor\DEPARTMENTPROCESSOR.cs" />
     <Compile Include="DepartmentDataProcessor\IDEPARTMENTPROCESSOR.cs" />
     <Compile Include="EmployeeDataProcessor\Employee.cs" />
