@@ -12,5 +12,7 @@ namespace EMS.DataProcessor.DepartmentDataProcessor
         List<DepartmentModel> GetDepartments { get; }
 
         DepartmentModel GetDepartment(int DepartmentId);
+
+        bool Remove(int DepartmentId);
     }
 }

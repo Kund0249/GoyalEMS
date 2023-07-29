@@ -23,8 +23,11 @@ namespace GoyalEMS.Admin
             DepartmentModel department = new DepartmentModel()
             {
                 DepartmentName = txtDepartmentName.Text.Trim(),
-                DeptId = Convert.ToInt32(HdfDepartmentId.Value)
+                DeptId = 0
             };
+
+            if (!(string.IsNullOrEmpty(HdfDepartmentId.Value) && string.IsNullOrWhiteSpace(HdfDepartmentId.Value)))
+                department.DeptId = Convert.ToInt32(HdfDepartmentId.Value);
 
             string Message = Processor.Save(department, out int status);
 
@@ -83,17 +86,31 @@ namespace GoyalEMS.Admin
                 txtDepartmentName.Text = model.DepartmentName;
                 HdfDepartmentId.Value = model.DeptId.ToString();
             }
+        }
 
+        protected void DeptGrid_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
+        {
+            int DepartmentId = Convert.ToInt32(DeptGrid.DataKeys[e.RowIndex].Value);
 
-            //int rowindex = DeptGrid.SelectedIndex;
+            bool isDeleted = Processor.Remove(DepartmentId);
+            string Messag = string.Empty;
+            string AlertMessage = string.Empty;
+            if (isDeleted)
+            {
+                 Messag = "Records deleted permanen from the System, Deleted Id - " + DepartmentId;
+                 AlertMessage = "toastr.success('" + Messag + "'" + ",'success'," + "{'positionClass' : 'toast-top-center'}" + ")";
+                GetAllDepartments();
+            }
+            else
+            {
+                Messag = "System not able to process this request";
+                AlertMessage = "toastr.error('" + Messag + "'" + ",'Error'," + "{'positionClass' : 'toast-top-center'}" + ")";
 
-            //var id = DeptGrid.DataKeys[rowindex].Value;
+            }
 
-            //Messag = id.ToString();
+            //string Messag = DepartmentId.ToString();
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "MS012", AlertMessage, true);
 
-
-            //string AlertMessage = "toastr.success('" + Messag + "'" + ",'Success'," + "{'positionClass' : 'toast-top-center'}" + ")";
-            //ClientScript.RegisterClientScriptBlock(this.GetType(), "MS012", AlertMessage, true);
         }
     }
 }

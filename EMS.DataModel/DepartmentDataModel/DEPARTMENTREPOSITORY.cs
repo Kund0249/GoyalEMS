@@ -46,7 +46,7 @@ namespace EMS.DataModel.DepartmentDataModel
 
         public Department GetDepartment(int DepartmentId)
         {
-           Department departments = null;
+            Department departments = null;
 
             SqlConnection con = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand("select * from tblDepartment where DeptId = " + DepartmentId, con);
@@ -70,6 +70,22 @@ namespace EMS.DataModel.DepartmentDataModel
             }
 
             return departments;
+        }
+
+        public bool Remove(int DepartmentID)
+        {
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand("delete from tblDepartment where DeptId = " + DepartmentID, con);
+
+            con.Open();
+            int row = cmd.ExecuteNonQuery();
+            con.Close();
+
+            if (row > 0)
+                return true;
+            else
+                return false;
+
         }
 
         public string Save(Department department, out int StatusCode)
@@ -112,7 +128,7 @@ namespace EMS.DataModel.DepartmentDataModel
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 dataAdapter.Fill(table);
 
-               
+
                 string Message = string.Empty;
                 if (table.Rows.Count > 0)
                 {

@@ -1,22 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Department.aspx.cs" Inherits="GoyalEMS.Admin.Department" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" 
+    CodeBehind="Department.aspx.cs" Inherits="GoyalEMS.Admin.Department" 
+    MasterPageFile ="~/AppLayout/AdminLayout.Master"%>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>EMS-Department</title>
-    <link href="../Content/CSS/bootstrap.css" rel="stylesheet" />
-
-    <link href="../ClientLib/toastr.css" rel="stylesheet" />
-
-    <script src="../ClientLib/jquery.js"></script>
-    <script src="../ClientLib/toastr.min.js"></script>
-    
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div class="container-fluid">
-            <div class="row bg-primary">
+<asp:Content runat="server" ContentPlaceHolderID="childpages">
+         <div class="row bg-primary">
                 <div class="wells">
                     <h2 class="text-center text-white">Goyal InfoTech Departmetn</h2>
                 </div>
@@ -63,19 +51,30 @@
                         ID="DeptGrid" AutoGenerateColumns="false"
                         CssClass="table"
                         OnSelectedIndexChanged="DeptGrid_SelectedIndexChanged"
+                        OnRowDeleting="DeptGrid_RowDeleting"
                         DataKeyNames="DeptId">
                         <Columns>
                             <asp:BoundField HeaderText="Department Code" DataField="DeptId" />
                             <asp:BoundField HeaderText="Department Name" DataField="DepartmentName" />
-                            <asp:CommandField HeaderText="Action" ShowSelectButton="true"
-                                SelectText="Edit" ButtonType="Button"
-                                ControlStyle-CssClass="btn btn-primary"/>
+                            <asp:CommandField HeaderText="Action" 
+                                ShowSelectButton="true"
+                                SelectText="Edit" 
+                                ButtonType="Button"
+                                ControlStyle-CssClass="btn btn-primary"
+                                />
+
+                             <asp:CommandField 
+                                ShowDeleteButton="true"
+                                DeleteText="Remove" 
+                                ButtonType="Button"
+                                ControlStyle-CssClass="btn btn-danger"
+                                />
+
                         </Columns>
                     </asp:GridView>
                 </div>
             </div>
 
-        </div>
-    </form>
-</body>
-</html>
+</asp:Content>
+
+       

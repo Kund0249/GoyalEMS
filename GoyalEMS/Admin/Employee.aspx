@@ -1,16 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Employee.aspx.cs" Inherits="GoyalEMS.Admin.Employee" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" 
+    CodeBehind="Employee.aspx.cs" Inherits="GoyalEMS.Admin.Employee" 
+    MasterPageFile="~/AppLayout/AdminLayout.Master"%>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>EMS-Employee</title>
-    <link href="../Content/CSS/bootstrap.css" rel="stylesheet" />
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div class="container-fluid">
-            <div class="row">
+<asp:Content runat="server" ContentPlaceHolderID ="childpages">
+     <div class="row">
                 <div class="col-md-6 offset-3">
                     <table class="table">
                         <tr>
@@ -100,7 +93,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </form>
-</body>
-</html>
+</asp:Content>
+           
+      

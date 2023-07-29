@@ -1,0 +1,52 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminLayout.master.cs" Inherits="GoyalEMS.AppLayout.AdminLayout" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="../Content/CSS/css/bootstrap.css" rel="stylesheet" />
+    <link href="../ClientLib/toastr.css" rel="stylesheet" />
+
+    <script src="../ClientLib/jquery.js"></script>
+    <script src="../ClientLib/toastr.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="../Admin/Department.aspx">Department</a>
+                    <a class="nav-link" href="../Admin/BulkDepartmentInsert.aspx">Bulk Upload</a>
+                    <a class="nav-link" href="../Admin/Employee.aspx">Employee</a>
+
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <form runat="server" id="form1">
+                <asp:ContentPlaceHolder ID="childpages" runat="server"></asp:ContentPlaceHolder>
+            </form>
+        </div>
+
+
+        <div class="row">
+            <footer>
+                <div class="row bg-light text-center">
+                    <span><b>All right reserved by QuickXpert - </b></span><% Response.Write(DateTime.Now.ToLongDateString()); %>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>

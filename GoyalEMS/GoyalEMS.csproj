@@ -70,6 +70,7 @@
     <Content Include="Admin\BulkDepartmentInsert.aspx" />
     <Content Include="Admin\Department.aspx" />
     <Content Include="Admin\Employee.aspx" />
+    <Content Include="Admin\Test.aspx" />
     <Content Include="BasicCalculator.aspx" />
     <Content Include="ClientLib\jquery.js" />
     <Content Include="ClientLib\toastr.css" />
@@ -107,6 +108,20 @@
     <Compile Include="Admin\Employee.aspx.designer.cs">
       <DependentUpon>Employee.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppLayout\AdminLayout.Master.cs">
+      <DependentUpon>AdminLayout.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppLayout\AdminLayout.Master.designer.cs">
+      <DependentUpon>AdminLayout.Master</DependentUpon>
+    </Compile>
     <Compile Include="BasicCalculator.aspx.cs">
       <DependentUpon>BasicCalculator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -124,6 +139,7 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestGit.aspx.cs">
       <DependentUpon>TestGit.aspx</DependentUpon>
@@ -135,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libman.json" />
+    <Content Include="AppLayout\AdminLayout.Master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -145,7 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMS.DataModel\EMS.DataModel.csproj">

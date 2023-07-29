@@ -48,6 +48,11 @@ namespace EMS.DataProcessor.DepartmentDataProcessor
             return null;
         }
 
+        public bool Remove(int DepartmentId)
+        {
+           return _DB.Remove(DepartmentId);
+        }
+
         public string Save(DepartmentModel Model, out int StatusCode)
         {
             Department department = new Department()

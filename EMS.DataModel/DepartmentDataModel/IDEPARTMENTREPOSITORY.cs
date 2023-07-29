@@ -14,5 +14,7 @@ namespace EMS.DataModel.DepartmentDataModel
         List<Department> GetDepartments { get; }
 
         Department GetDepartment(int DepartmentId);
+
+        bool Remove(int DepartmentID);
     }
 }

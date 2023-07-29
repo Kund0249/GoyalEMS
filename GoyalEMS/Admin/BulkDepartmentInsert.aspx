@@ -1,20 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BulkDepartmentInsert.aspx.cs" Inherits="GoyalEMS.Admin.BulkDepartmentInsert" %>
+﻿<%@ Page Language="C#" 
+    AutoEventWireup="true" 
+    CodeBehind="BulkDepartmentInsert.aspx.cs" Inherits="GoyalEMS.Admin.BulkDepartmentInsert" 
+    MasterPageFile="~/AppLayout/AdminLayout.Master"%>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>EMS-Department</title>
-    <link href="../Content/CSS/bootstrap.css" rel="stylesheet" />
-
-    <link href="../Content/toastr/toastr.css" rel="stylesheet" />
-
-    <script src="../Content/Jquery/jquery.js"></script>
-    <script src="../Content/toastr/toastr.min.js"></script>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <<div class="container-fluid">
+<asp:Content runat="server" ID="BulkDepartmentPage" ContentPlaceHolderID="childpages">
+       
             <div class="row bg-primary">
                 <div class="wells">
                     <h2 class="text-center text-white">Goyal InfoTech Departmetn</h2>
@@ -67,7 +57,8 @@
                 </div>
             </div>
 
-        </div>
-    </form>
-</body>
-</html>
+       
+</asp:Content>
+    
+     
+   
