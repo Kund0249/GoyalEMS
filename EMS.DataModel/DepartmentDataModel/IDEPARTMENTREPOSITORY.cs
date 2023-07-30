@@ -12,7 +12,7 @@ namespace EMS.DataModel.DepartmentDataModel
 
         string Update(Department department, out int StatusCode);
         List<Department> GetDepartments { get; }
-
+        List<Department> GetDepartmentsByPageNumber(int pageNo = 1);
         Department GetDepartment(int DepartmentId);
 
         bool Remove(int DepartmentID);

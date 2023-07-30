@@ -44,6 +44,36 @@ namespace EMS.DataModel.DepartmentDataModel
             }
         }
 
+        public List<Department> GetDepartmentsByPageNumber(int pageNo = 1)
+        {
+            List<Department> departments = new List<Department>();
+
+            SqlConnection con = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand("spGetDepartments", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@p_pageNumber", pageNo);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            adapter.Fill(dt);
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        departments.Add(new Department()
+                        { DeptId = Convert.ToInt32(dr["DeptId"]), DepartmentName = dr["DepartmentName"].ToString(),TotalItems =  Convert.ToInt32(dr["TotalRow"])});
+                    }
+                    //departments.Add(new Department() { DeptId = 1,DepartmentName="A"})
+                }
+            }
+            return departments;
+        }
+
         public Department GetDepartment(int DepartmentId)
         {
             Department departments = null;

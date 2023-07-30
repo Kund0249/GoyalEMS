@@ -8,6 +8,14 @@ namespace EMS.DataProcessor.DepartmentDataProcessor
 {
     public class DepartmentModel
     {
+        public DepartmentModel()
+        {
+
+        }
+        public DepartmentModel(int total)
+        {
+            TotalItem = total;
+        }
         public int DeptId { get; set; }
         private string _DepartmentName { get; set; }
 
@@ -22,5 +30,6 @@ namespace EMS.DataProcessor.DepartmentDataProcessor
             }
         }
 
+        public int TotalItem { get;}
     }
 }

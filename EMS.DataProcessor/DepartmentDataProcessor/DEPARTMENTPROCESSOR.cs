@@ -48,6 +48,24 @@ namespace EMS.DataProcessor.DepartmentDataProcessor
             return null;
         }
 
+        public List<DepartmentModel> GetDepartmentsByPageNumber(int pageNo = 1)
+        {
+            List<DepartmentModel> departments = new List<DepartmentModel>();
+
+            List<Department> departmentlist = _DB.GetDepartmentsByPageNumber(pageNo);
+
+            foreach (var dept in departmentlist)
+            {
+                departments.Add(new DepartmentModel(dept.TotalItems)
+                {
+                    DeptId = dept.DeptId,
+                    DepartmentName = dept.DepartmentName
+                });
+            }
+
+            return departments;
+        }
+
         public bool Remove(int DepartmentId)
         {
            return _DB.Remove(DepartmentId);

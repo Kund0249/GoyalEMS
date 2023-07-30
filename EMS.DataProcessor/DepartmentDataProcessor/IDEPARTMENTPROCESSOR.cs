@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EMS.DataModel.DepartmentDataModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace EMS.DataProcessor.DepartmentDataProcessor
     {
         string Save(DepartmentModel department, out int StatusCode);
         List<DepartmentModel> GetDepartments { get; }
+
+        List<DepartmentModel> GetDepartmentsByPageNumber(int pageNo = 1);
 
         DepartmentModel GetDepartment(int DepartmentId);
 

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using EMS.DataModel.DepartmentDataModel;
 using EMS.DataProcessor;
 using EMS.DataProcessor.DepartmentDataProcessor;
+using GoyalEMS.Models;
 
 namespace GoyalEMS.Admin
 {
@@ -14,7 +16,22 @@ namespace GoyalEMS.Admin
         {
             if (!IsPostBack)
             {
-                GetAllDepartments();
+                if (Request.QueryString["pno"] != null)
+                {
+                    if (int.TryParse(Request.QueryString["pno"].ToString(), out int PageNo))
+                    {
+                        GetAllDepartments(PageNo);
+                    }
+                    else
+                    {
+                        GetAllDepartments();
+                    }
+                }
+                else
+                {
+                    GetAllDepartments();
+                }
+
             }
         }
 
@@ -55,9 +72,23 @@ namespace GoyalEMS.Admin
 
         }
 
-        public void GetAllDepartments()
+        public void GetAllDepartments(int pageNo = 1)
         {
-            DeptGrid.DataSource = Processor.GetDepartments;
+
+            List<DepartmentModel> departmentModels = Processor.GetDepartmentsByPageNumber(pageNo);
+            Pager pager = new Pager(departmentModels[0].TotalItem);
+            pager.CurrentPage = pageNo;
+
+            btnlkNext.Enabled = pager.IsNext;
+            btnlinkPrev.Enabled = pager.IsPrevious;
+
+            ViewState["Pager"] = pageNo;
+            ViewState["lastpageno"] = pager.TotalPage;
+
+            rptPageNumber.DataSource = pager.Pages;
+            rptPageNumber.DataBind();
+
+            DeptGrid.DataSource = departmentModels;
             DeptGrid.DataBind();
         }
 
@@ -97,8 +128,8 @@ namespace GoyalEMS.Admin
             string AlertMessage = string.Empty;
             if (isDeleted)
             {
-                 Messag = "Records deleted permanen from the System, Deleted Id - " + DepartmentId;
-                 AlertMessage = "toastr.success('" + Messag + "'" + ",'success'," + "{'positionClass' : 'toast-top-center'}" + ")";
+                Messag = "Records deleted permanen from the System, Deleted Id - " + DepartmentId;
+                AlertMessage = "toastr.success('" + Messag + "'" + ",'success'," + "{'positionClass' : 'toast-top-center'}" + ")";
                 GetAllDepartments();
             }
             else
@@ -111,6 +142,34 @@ namespace GoyalEMS.Admin
             //string Messag = DepartmentId.ToString();
             ClientScript.RegisterClientScriptBlock(this.GetType(), "MS012", AlertMessage, true);
 
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnlkNext_Click(object sender, EventArgs e)
+        {
+            if (ViewState["Pager"] != null)
+            {
+                int currentpage = Convert.ToInt32(ViewState["Pager"]);
+                currentpage++;
+
+                GetAllDepartments(currentpage);
+            }
+        }
+
+        protected void btnlinkPrev_Click(object sender, EventArgs e)
+        {
+            if (ViewState["Pager"] != null)
+            {
+                int currentpage = Convert.ToInt32(ViewState["Pager"]);
+                if (currentpage > 0)
+                    currentpage--;
+
+                GetAllDepartments(currentpage);
+            }
         }
     }
 }
