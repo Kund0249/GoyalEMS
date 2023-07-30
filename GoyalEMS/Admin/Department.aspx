@@ -49,16 +49,28 @@
         <div class="col-4">
         </div>
         <div class="col-4">
+            <div class="row">
+                <div class="col-8">
+                    <asp:TextBox runat="server" 
+                        ID="txtSearch" placeholder ="Search by Name"
+                        CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="col-4">
+                    <asp:Button Text="Search" runat="server" ID="btnSearch" 
+                        CssClass="btn btn-primary"/>
+                </div>
+            </div>
         </div>
         <div class="col-4">
           
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
-                        <asp:HyperLink runat="server" ID="firstpage"
-                            CssClass="page-link">
-                            First
-                        </asp:HyperLink>
+                         <asp:LinkButton runat="server" Text="First" ID="btnlkFirst"
+                           CssClass="page-link"
+                           OnClick="btnlkFirst_Click">
+
+                       </asp:LinkButton>
                     </li>
                     <li class="page-item">
                        <asp:LinkButton runat="server" Text="Prev" ID="btnlinkPrev"
@@ -84,10 +96,10 @@
                             />
                     </li>
                     <li class="page-item">
-                        <asp:HyperLink runat="server" ID="last"
-                            CssClass="page-link">
-                            Last
-                        </asp:HyperLink>
+                       <asp:LinkButton runat="server" Text="Last"
+                            ID="btnlkLast" OnClick="btnlkLast_Click" 
+                            CssClass="page-link"
+                            />
                     </li>
                 </ul>
             </nav>

@@ -71,16 +71,29 @@ namespace GoyalEMS.Admin
             ClientScript.RegisterClientScriptBlock(this.GetType(), "MSG01", AlertMessage, true);
 
         }
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            string Messag = "Record Inserted";
 
+            string AlertMessage = "toastr.success('" + Messag + "'" + ",'Success'," + "{'positionClass' : 'toast-top-center'}" + ")";
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "MS012", AlertMessage, true);
+        }
+
+        #region GridviewEevnt
         public void GetAllDepartments(int pageNo = 1)
         {
+            if (ViewState["Pager"] != null)
+                pageNo = Convert.ToInt32(ViewState["Pager"]);
 
             List<DepartmentModel> departmentModels = Processor.GetDepartmentsByPageNumber(pageNo);
-            Pager pager = new Pager(departmentModels[0].TotalItem);
-            pager.CurrentPage = pageNo;
+            Pager pager = new Pager(departmentModels[0].TotalItem,CurrentPage:pageNo);
+           
 
             btnlkNext.Enabled = pager.IsNext;
             btnlinkPrev.Enabled = pager.IsPrevious;
+
+            btnlkFirst.Enabled = pager.IsFirst;
+            btnlkLast.Enabled = pager.IsLast;
 
             ViewState["Pager"] = pageNo;
             ViewState["lastpageno"] = pager.TotalPage;
@@ -90,14 +103,6 @@ namespace GoyalEMS.Admin
 
             DeptGrid.DataSource = departmentModels;
             DeptGrid.DataBind();
-        }
-
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            string Messag = "Record Inserted";
-
-            string AlertMessage = "toastr.success('" + Messag + "'" + ",'Success'," + "{'positionClass' : 'toast-top-center'}" + ")";
-            ClientScript.RegisterClientScriptBlock(this.GetType(), "MS012", AlertMessage, true);
         }
 
         protected void DeptGrid_SelectedIndexChanged(object sender, EventArgs e)
@@ -143,20 +148,16 @@ namespace GoyalEMS.Admin
             ClientScript.RegisterClientScriptBlock(this.GetType(), "MS012", AlertMessage, true);
 
         }
+        #endregion
 
-        protected void btnNext_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        #region Pagination
         protected void btnlkNext_Click(object sender, EventArgs e)
         {
             if (ViewState["Pager"] != null)
             {
                 int currentpage = Convert.ToInt32(ViewState["Pager"]);
                 currentpage++;
-
-                GetAllDepartments(currentpage);
+                Response.Redirect("~/Admin/Department.aspx?pno=" + currentpage.ToString());
             }
         }
 
@@ -168,8 +169,23 @@ namespace GoyalEMS.Admin
                 if (currentpage > 0)
                     currentpage--;
 
-                GetAllDepartments(currentpage);
+                Response.Redirect("~/Admin/Department.aspx?pno=" + currentpage.ToString());
             }
         }
+
+        protected void btnlkFirst_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Admin/Department.aspx?pno=1");
+        }
+
+        protected void btnlkLast_Click(object sender, EventArgs e)
+        {
+            if(ViewState["lastpageno"] != null)
+            {
+                Response.Redirect("~/Admin/Department.aspx?pno=" + Convert.ToInt32(ViewState["lastpageno"]).ToString());
+               
+            }
+        }
+        #endregion
     }
 }

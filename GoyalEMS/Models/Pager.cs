@@ -7,8 +7,9 @@ namespace GoyalEMS.Models
 {
     public class Pager
     {
-        public Pager(int totalcount, int RowPerPage = 5)
+        public Pager(int totalcount, int RowPerPage = 5, int CurrentPage = 1)
         {
+            int count = 0;
             TotalCount = totalcount;
             int rem = totalcount % RowPerPage;
             TotalPage = totalcount / RowPerPage;
@@ -16,23 +17,36 @@ namespace GoyalEMS.Models
                 TotalPage++;
 
             Pages = new List<Pages>();
+            int RemainingPage = TotalPage - CurrentPage;
             for (int i = 1; i <= TotalPage; i++)
             {
-                if (i > 3)
+                if (i < CurrentPage && RemainingPage >= 3)
+                    continue;
+                else if (i < CurrentPage && RemainingPage == 2)
+                    continue;
+                else if (i < (CurrentPage - 1) && RemainingPage == 1)
+                    continue;
+                else if (i < (CurrentPage - 2) && RemainingPage == 0)
+                    continue;
+
+                if (count == 3)
                     break;
 
                 Pages.Add(new Models.Pages()
                 {
                     PageNumber = i
                 });
+                count++;
             }
+
+            this.CurrentPage = CurrentPage;
         }
 
         private int _CurrentPage { get; set; }
         public int CurrentPage
         {
             get { return _CurrentPage; }
-            set
+            private set
             {
                 _CurrentPage = value;
 

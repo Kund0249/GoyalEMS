@@ -51,13 +51,31 @@ namespace GoyalEMS.Admin
         protected global::System.Web.UI.WebControls.Button btnCancel;
 
         /// <summary>
-        /// firstpage control.
+        /// txtSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink firstpage;
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+
+        /// <summary>
+        /// btnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearch;
+
+        /// <summary>
+        /// btnlkFirst control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnlkFirst;
 
         /// <summary>
         /// btnlinkPrev control.
@@ -87,13 +105,13 @@ namespace GoyalEMS.Admin
         protected global::System.Web.UI.WebControls.LinkButton btnlkNext;
 
         /// <summary>
-        /// last control.
+        /// btnlkLast control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink last;
+        protected global::System.Web.UI.WebControls.LinkButton btnlkLast;
 
         /// <summary>
         /// DeptGrid control.
