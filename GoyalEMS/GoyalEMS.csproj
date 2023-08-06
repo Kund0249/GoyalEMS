@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\Login.aspx" />
     <Content Include="Admin\BulkDepartmentInsert.aspx" />
     <Content Include="Admin\Department.aspx" />
     <Content Include="Admin\Employee.aspx" />
@@ -87,6 +88,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\BulkDepartmentInsert.aspx.cs">
       <DependentUpon>BulkDepartmentInsert.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -153,6 +161,7 @@
   <ItemGroup>
     <Content Include="libman.json" />
     <Content Include="AppLayout\AdminLayout.Master" />
+    <Content Include="Admin\Web.config" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -162,6 +171,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AppFiles\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
